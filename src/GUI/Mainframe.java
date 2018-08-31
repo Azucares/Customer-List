@@ -296,6 +296,7 @@ public class Mainframe extends JFrame {
 		
 		prefs = Preferences.userRoot().node("custList") ;
 		
+		//sets a listener to save changes to the database server info to preferences
 		dbPrefs.setprefsListener(new PrefsListener(){
 			@Override
 			public void preferencesSet(String serverName, String user, String password, String dbName, Integer port) {
