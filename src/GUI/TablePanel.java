@@ -132,7 +132,6 @@ public class TablePanel extends JPanel implements ActionListener {
 		this.formListener = formListener ;
 	}
 	public int getRow() {
-		System.out.println(row + " is row");
 		return row;
 	}
 	public void printTable() throws PrinterException{

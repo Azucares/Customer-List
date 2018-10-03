@@ -244,7 +244,10 @@ public class DetailsDialog extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
+				if(supplyFileName == null || supplyFileName.length() < 1){
+					JOptionPane.showMessageDialog(null, "No supply file has been entered", "Could not open file", JOptionPane.ERROR_MESSAGE);
+				}else{
+					try {
 				     if (Desktop.isDesktopSupported()) {
 				    	String fileName = "\\\\AOA1\\Meter\\" + supplyFileName + ".123" ;
 				    	File file = new File(fileName) ;				    	 
@@ -254,6 +257,7 @@ public class DetailsDialog extends JDialog{
 				   } catch (Exception ioe) {
 					   JOptionPane.showMessageDialog(null, "Supply file not found on server", "Could not open file", JOptionPane.ERROR_MESSAGE);
 				  }
+				}
 			}			
 		});
 		

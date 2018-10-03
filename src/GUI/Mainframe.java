@@ -62,7 +62,6 @@ public class Mainframe extends JFrame {
 		
 		getRootPane().setDefaultButton(search.getDefaultButton());
 		
-		
 	//Processes actions from the search window
 				
 		search.setFormListener(new FormListener(){
@@ -78,7 +77,7 @@ public class Mainframe extends JFrame {
 					table.setData(custList);
 					table.refresh() ;
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, e.toString(), "Could not perform search", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Failed to process the search", "Could not perform search", JOptionPane.ERROR_MESSAGE);
 				}
 				}
 				
@@ -115,7 +114,7 @@ public class Mainframe extends JFrame {
 						table.setData(custList);
 						table.refresh() ;
 					}catch(Exception f){
-						JOptionPane.showMessageDialog(null, e.toString(), "Could not delete entry", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Failed to remove the entry", "Could not delete entry", JOptionPane.ERROR_MESSAGE);
 					}					
 				}
 				if(e.getTableFunction().equals("details")){
@@ -125,7 +124,8 @@ public class Mainframe extends JFrame {
 						detailsDialog.setDialogFunction("details");
 						detailsDialog.updateCalled(custList.get(table.getRow()));
 						detailsDialog.setVisible(true);
-					}catch(Exception f){						
+					}catch(Exception f){
+						JOptionPane.showMessageDialog(null, "Could not open details window", "Could not open details window", JOptionPane.ERROR_MESSAGE);
 					}					
 				}
 				if(e.getTableFunction().equals("copySerial")){
@@ -134,6 +134,7 @@ public class Mainframe extends JFrame {
 						Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
 						clpbrd.setContents(stringSelection, null);
 					}catch(Exception f){
+						JOptionPane.showMessageDialog(null, "Could not access clipboard", "Could not copy entry", JOptionPane.ERROR_MESSAGE);
 					}	
 				}
 			}			
@@ -183,15 +184,14 @@ public class Mainframe extends JFrame {
 						custList = controller.searchList(prefs.get("host", ""), prefs.get("db", ""), prefs.getInt("port", 3306), getUser(), getPassword()) ;
 						table.setData(custList);
 						table.refresh() ;
+						detailsDialog.setVisible(false) ;
 					}catch (Exception e1) {
-						System.out.println("could not update entry");
+						JOptionPane.showMessageDialog(null, "Failed to update entry", "Could not update the entry", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				if(e.getDialogFunction().equals("details")){
 					detailsDialog.detailsView();
 				}
-				
-				detailsDialog.setVisible(false) ;
 			}
 		});
 		
@@ -245,7 +245,7 @@ public class Mainframe extends JFrame {
 						}
 						
 					}catch(IOException writeError){
-						System.out.println("Unable to read file");
+						JOptionPane.showMessageDialog(null, "Could not access file", "Could not access file", JOptionPane.ERROR_MESSAGE);
 					}					
 				}
 				if(menuItem == "details"){
@@ -265,7 +265,7 @@ public class Mainframe extends JFrame {
 						table.setData(custList);
 						table.refresh() ;
 					}catch(Exception f){
-						System.out.println("Error deleting the entry");
+						JOptionPane.showMessageDialog(null, "Failed to remove the entry", "Could not delete entry", JOptionPane.ERROR_MESSAGE);
 					}	
 				}
 				if(menuItem == "undo"){
@@ -280,7 +280,7 @@ public class Mainframe extends JFrame {
 							
 							wasDeleted = null ;
 						}catch(Exception undoError){
-							JOptionPane.showMessageDialog(null, e.toString(), "Could not recreate entry", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Undo failed", "Could not recreate entry", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
