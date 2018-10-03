@@ -173,6 +173,7 @@ public class Mainframe extends JFrame {
 				if(e.getDialogFunction().equals("new")){
 					try{
 						controller.addEntry(e.getId(), e.getCompany(), e.getAddress(), e.getCity(), e.getZip(), e.getContact(), e.getPhone(), e.getMake(), e.getModel(), e.getSerial(), e.isMaint(), e.getInstall(), e.getRemoved(), e.isActive(), e.getSupplyFile(), e.getNotes(), e.isAtRemoteUpdate(), prefs.get("host", ""), prefs.get("db", ""), prefs.getInt("port", 3306), getUser(), getPassword()) ;
+						detailsDialog.setVisible(false) ;
 					}catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, e.toString(), "Could not add new entry", JOptionPane.ERROR_MESSAGE);
 					}
